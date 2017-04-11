@@ -11,6 +11,8 @@ public class Initiator : MonoBehaviour {
 	public GameObject controllerPrefab;
 
 	void Start() {
+		DontDestroyOnLoad(this);
+
 		MVC mvcCapsule = new MVC();
 		mvcCapsule.model =(GameObject) GameObject.Instantiate (modelPrefab, this.transform);
 		mvcCapsule.view =(GameObject) GameObject.Instantiate (viewPrefab, this.transform);

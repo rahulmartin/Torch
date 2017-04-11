@@ -31,3 +31,7 @@ public class ObjectData {
 		updateMethod = _updateMethod;
 	}
 }
+
+public class ObjectAttributes {
+	//this will store different attributes for objects like speed , damage etc
+}
