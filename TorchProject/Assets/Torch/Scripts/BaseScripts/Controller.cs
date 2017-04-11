@@ -37,6 +37,8 @@ public class Controller : MonoBehaviour {
 	public void Update() {
 		for(int i = newUidList.Count, j = 0; j <= i - 1; j++) {
 			MethodInfo[] startMethods = newObjectsDic[newUidList[j]].startMethod;
+			if(startMethods == null)
+				continue;
 			for(int k = startMethods.Length,l=0; l <= k-1; l++) {
 				CallMethod(startMethods[l], newUidList[j]);
 			}
@@ -49,6 +51,8 @@ public class Controller : MonoBehaviour {
 
 		for(int i = activeUidList.Count, j = 0; j <= i - 1; j++) {
 			MethodInfo[] updateMethods = activeObjectsDic[activeUidList[j]].updateMethod;
+			if(updateMethods == null)
+				continue;
 			for(int k = updateMethods.Length,l=0; l<=k-1; l++) {
 				CallMethod(updateMethods[l], activeUidList[j]);
 			}

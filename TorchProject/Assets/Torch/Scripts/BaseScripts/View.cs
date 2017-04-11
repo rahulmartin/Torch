@@ -13,12 +13,16 @@ public class View: MonoBehaviour, IControllerObserver {
 		capsule.controller.GetComponent<Controller>().AddObserver(this);
 	}
 
-	public void SetPrefab(string uid, string prefabID) {
+	public void SetPrefab(string uid, string prefabID,bool isUI = false) {
 		Controller controller = capsule.controller.GetComponent<Controller>();
 		GameObject loadedPrefab = Resources.Load<GameObject>(prefabID);
 		controller.GetObjectData(uid).objectPrefab = Instantiate(loadedPrefab);
 		GameObject instatiatedPrefab = controller.GetObjectData(uid).objectPrefab;
-		instatiatedPrefab.transform.SetParent(capsule.view.transform);
+		if(isUI)
+			instatiatedPrefab.transform.SetParent(capsule.view.transform.FindChild("CanvasContainer"), false);
+		else
+			instatiatedPrefab.transform.SetParent(capsule.view.transform);
+		
 		instatiatedPrefab.transform.name = prefabID + " (" + uid + ")";
 	}
 
@@ -28,6 +32,12 @@ public class View: MonoBehaviour, IControllerObserver {
 		instatiatedPrefab.transform.position = newPosition;
 	}
 
+	public void SetUIPosition(string uid, Vector2 newPosition) {
+		Controller controller = capsule.controller.GetComponent<Controller>();
+		GameObject instatiatedPrefab = controller.GetObjectData(uid).objectPrefab;
+		instatiatedPrefab.transform.GetComponent<RectTransform>().position = newPosition;
+	}
+		
 	public void OnObjectCreated(string uid, ObjectData objectData) {
 		viewObjectsDic.Add(uid, objectData);
 		Debug.Log("view object created");

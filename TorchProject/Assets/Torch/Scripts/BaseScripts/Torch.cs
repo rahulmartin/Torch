@@ -17,12 +17,16 @@ public static class Torch  {
 	public static void GetPrefab(string prefabID) {
 	}
 
-	public static void SetPrefab(string uid, string prefabID) {
-		capsule.view.SetPrefab(uid, prefabID);
+	public static void SetPrefab(string uid, string prefabID, bool isUI = false) {
+		capsule.view.SetPrefab(uid, prefabID, isUI);
 	}
 
 	public static void SetTransformPosition(string uid, Vector3 newPos) {
 		capsule.view.SetPosition(uid, newPos);
+	}
+
+	public static void SetUIPosition(string uid, Vector2 newPos) {
+		capsule.view.SetUIPosition(uid, newPos);
 	}
 
 	public static void DestroyObject(string uid) {
@@ -49,5 +53,4 @@ public static class Torch  {
 	public static bool HasTransform(string uid) {
 		return capsule.view.GetComponent<View>().HasObject(uid);
 	}
-
 }

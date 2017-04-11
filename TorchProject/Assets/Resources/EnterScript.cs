@@ -11,5 +11,9 @@ public static class EnterScript  {
 			Torch.SetPrefab(uid, "Cube");
 			Torch.SetTransformPosition(uid, new Vector3(Random.value*10,Random.value*10,Random.value*10));
 		}
+
+		string textUID = Torch.CreateObject(null);
+		Torch.SetPrefab(textUID, "Text", true);
+		Torch.SetUIPosition(textUID, new Vector2(Screen.width/2, Screen.height/2));
 	}
 }
