@@ -53,4 +53,16 @@ public static class Torch  {
 	public static bool HasTransform(string uid) {
 		return capsule.view.GetComponent<View>().HasObject(uid);
 	}
+
+	public static void SetGlobalProperty<T>(string propertyID, T value) {
+		capsule.model.GetComponent<Model>().SetGlobalProperty(propertyID, value as object);
+	}
+
+	public static T GetGlobalProperty<T>(string propertyID) {
+		return capsule.model.GetComponent<Model>().GetGlobalProperty<T>(propertyID);
+	}
+
+	public static void RemoveGlobalProperty(string propertyID) {
+		capsule.model.GetComponent<Model>().RemoveGlobalProperty(propertyID);
+	}
 }
