@@ -8,6 +8,10 @@ public class View: MonoBehaviour, IControllerObserver {
 	public MVC capsule;
 	public Dictionary<string, ObjectData> viewObjectsDic = new Dictionary<string, ObjectData>();
 
+	public void Start() {
+		DontDestroyOnLoad(this);
+	}
+
 	public void initiate(MVC mvcCapsule) {
 		capsule = mvcCapsule;
 		capsule.controller.GetComponent<Controller>().AddObserver(this);

@@ -3,7 +3,7 @@ using System.Collections;
 
 public static class Torch  {
 	public static MVCUnwrapped capsule = new MVCUnwrapped();
-
+	public delegate void LoadSceneCallback(float progress, bool isdone);
 	public static void initTorch(MVC mvcCapsule) {
 		capsule.model = mvcCapsule.model.GetComponent<Model>();
 		capsule.view = mvcCapsule.view.GetComponent<View>();
@@ -64,5 +64,9 @@ public static class Torch  {
 
 	public static void RemoveGlobalProperty(string propertyID) {
 		capsule.model.GetComponent<Model>().RemoveGlobalProperty(propertyID);
+	}
+
+	public static void SwitchSceneAsych(string sceneName, LoadSceneCallback callback) {
+		capsule.model.GetComponent<Model>().SceneLoadAsynch(sceneName, callback);
 	}
 }

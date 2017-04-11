@@ -23,6 +23,7 @@ public class Controller : MonoBehaviour {
 	//top level methods
 
 	public void Start() {
+		DontDestroyOnLoad(this);
 		Debug.Log("Controller Started");
 	}
 

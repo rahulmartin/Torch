@@ -11,6 +11,10 @@ public class Model : MonoBehaviour {
 	MVC capsule;
 	Dictionary<string, object> globalPropertyList = new Dictionary<string, object>();
 
+	public void Start() {
+		DontDestroyOnLoad(this);
+	}
+
 	public void initiate(MVC mvcCapsule) {
 		capsule = mvcCapsule;
 	}
@@ -40,5 +44,20 @@ public class Model : MonoBehaviour {
 			globalPropertyList.Remove(propertyID);
 		else
 			Debug.LogWarning("Property was not removed , it was already removed or was never present int the dictionary");
+	}
+
+	public void SceneLoadAsynch(string sceneName, Torch.LoadSceneCallback callback) {
+		StartCoroutine(SceneLoadEnum(sceneName, callback));
+	}
+		
+	private IEnumerator SceneLoadEnum(string sceneName, Torch.LoadSceneCallback callback) {
+		AsyncOperation loadingOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName, UnityEngine.SceneManagement.LoadSceneMode.Single);
+		loadingOperation.allowSceneActivation = false;
+		while(loadingOperation.progress <= 0.8) {
+			callback(loadingOperation.progress, loadingOperation.isDone);
+			yield return null;
+		}
+		loadingOperation.allowSceneActivation = true;
+		callback(1f, true);
 	}
 }
